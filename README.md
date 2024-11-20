@@ -1,7 +1,7 @@
-# **Book Management System**
+# **Book Management System: BookMate**
 
 ## **Overview**
-The Book Management System is a simple console-based application designed to manage books and user interactions. The application is built using Python and SQLite as the database, focusing on clear separation of layers: front-end (console interface), middle application tier (business logic), and back-end (SQLite database). 
+BookMate is a simple console-based Book Management application designed to manage books and user interactions. The application is built using Python and SQLite as the database, focusing on clear separation of layers: front-end (console interface), middle application tier (business logic), and back-end (SQLite database). 
 
 The system allows users to:
 - Sign up and log in to the system.
@@ -35,17 +35,25 @@ The project demonstrates object-oriented principles like inheritance, encapsulat
 ## **Project Structure**
 
 ```plaintext
-BookManagementSystem/
-├── app.py                # Main entry point for the application
-├── db_manager.py         # Manages all database operations
-├── user.py               # Handles user-related functionalities
-├── book.py               # Handles book-related functionalities
-├── request.py            # Handles request-related functionalities
-├── console_ui.py         # Manages user interaction through the console
-├── requirements.txt      # Python dependencies
-├── README.md             # Documentation for the project
-└── database/
-    └── book_management.db # SQLite database file
+BookMate/
+├── README.md                   # Project documentation with setup, usage, and features.
+├── book_management.db          # SQLite database file storing users, books, and requests.
+├── requirements.txt            # Dependencies for the project.
+├── main.py                     # Entry point of the application, manages app flow.
+├── base/
+│   ├── __init__.py             # Marks the `base` directory as a Python package.
+│   └── base.py                 # Shared base classes or abstract classes for the project.
+├── controllers/
+│   ├── __init__.py             # Marks the `controllers` directory as a Python package.
+│   ├── book.py                 # Logic for managing books (add, delete, search).
+│   ├── request.py              # Logic for handling book requests (create, view, update).
+│   └── user.py                 # User operations like signup, login, logout.
+├── models/
+│   ├── __init__.py             # Marks the `models` directory as a Python package.
+│   └── database.py             # Manages database connections and operations.
+└── views/
+    ├── __init__.py             # Marks the `views` directory as a Python package.
+    └── console_ui.py           # Handles user interaction via the console.
 ```
 
 ## **Setup Instructions**
