@@ -1,0 +1,18 @@
+@startuml
+actor User as U
+participant "ConsoleUI" as UI
+participant "Request Controller" as RC
+participant "Book Controller" as BC
+participant "DBManager" as DB
+
+U -> UI: Enter Book ID to request
+UI -> RC: Create Request instance
+RC -> BC: Get Book Owner ID
+BC -> DB: Fetch owner_id using Book ID
+DB --> BC: Return owner_id
+BC --> RC: Return owner_id
+RC -> DB: Insert request into database
+DB --> RC: Success/Failure
+RC --> UI: Notify result
+UI --> U: Display result to the user
+@enduml

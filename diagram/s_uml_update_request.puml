@@ -1,0 +1,15 @@
+@startuml
+actor User as U
+participant ConsoleUI as UI
+participant RequestController as RC
+participant DBManager as DB
+
+U -> UI: Select request ID and provide status (Accept/Reject)
+UI -> RC: Call update_request_status(request_id, status)
+RC -> DB: Execute SELECT query to fetch request details
+DB --> RC: Return request data
+RC -> DB: Execute UPDATE queries for requests and books (if accepted)
+DB --> RC: Return success/failure
+RC --> UI: Return result
+UI --> U: Show success or failure message
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+actor User as U
+participant ConsoleUI as UI
+participant BookController as BC
+participant DBManager as DB
+
+U -> UI: Enter keyword
+UI -> BC: Call search(keyword)
+BC -> DB: Execute SELECT query with LIKE operator
+DB --> BC: Return matching book list
+BC --> UI: Return search results
+UI --> U: Display list of books
+@enduml

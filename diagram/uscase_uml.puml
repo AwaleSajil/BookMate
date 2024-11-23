@@ -1,0 +1,26 @@
+@startuml
+actor User
+
+package "BookMate System" {
+    usecase "Login" as UC_Login
+    usecase "Signup" as UC_Signup
+    usecase "Logout" as UC_Logout
+    usecase "Add Book" as UC_AddBook
+    usecase "Delete Book" as UC_DeleteBook
+    usecase "Search Book" as UC_SearchBook
+    usecase "Request Book" as UC_RequestBook
+    usecase "View Requests" as UC_ViewRequests
+    usecase "Update Request Status" as UC_UpdateRequest
+}
+
+User --> UC_Login
+User --> UC_Signup
+User --> UC_Logout
+User --> UC_AddBook
+User --> UC_DeleteBook
+User --> UC_SearchBook
+User --> UC_RequestBook
+User --> UC_ViewRequests
+User --> UC_UpdateRequest
+
+@enduml

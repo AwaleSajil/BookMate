@@ -1,0 +1,89 @@
+@startuml
+' Set the layout direction from left to right
+left to right direction
+package "Controllers" {
+    abstract class BaseModel {
+        + save()
+        + delete()
+    }
+
+    class User {
+        + user_id: int
+        + username: str
+        + password: str
+        --
+        + login(username: str, password: str): str
+        + save(username: str, password: str): bool
+        + delete(): void
+    }
+
+    class Book {
+        + book_id: int
+        + title: str
+        + author: str
+        + isbn: str
+        + owner_id: int
+        --
+        + save(): bool
+        + delete(book_id: int, owner_id: int): bool
+        + search(keyword: str): list
+        + get_owner_id(book_id: int): int
+    }
+
+    class Request {
+        + request_id: int
+        + book_id: int
+        + requester_id: int
+        + owner_id: int
+        + status: str
+        --
+        + save(): bool
+        + delete(): void
+        + view_requests(owner_id: int): list
+        + update_request_status(request_id: int, status: str): void
+    }
+
+    ' Relationships
+    BaseModel <|-- User
+    BaseModel <|-- Book
+    BaseModel <|-- Request
+}
+
+package "Models" {
+    class DBManager {
+        +_connection: Connection
+        --
+        +get_connection(): Connection
+        +setup_database(): void
+        +execute_query(query: str, params: tuple): Cursor
+        +fetch_all(query: str, params: tuple): list
+        +fetch_one(query: str, params: tuple): tuple
+    }
+
+    ' Relationships
+      User --* DBManager
+      Book --* DBManager
+      Request --* DBManager
+
+}
+
+package "Views" {
+
+    class ConsoleUI {
+        + text_color: dict
+        --
+        + display_welcome_menu(): void
+        + display_actions_menu(): void
+        + get_user_input(prompt: str): str
+        + get_user_password(prompt: str): str
+        + display_message(message: str, c: str = None): void
+        + display_books(books: list): void
+        + interact_requests(requests: list): void
+    }
+
+    ' Relationships
+    User --o ConsoleUI
+    Book --o ConsoleUI
+    Request --o ConsoleUI
+}
+@enduml

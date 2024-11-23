@@ -1,0 +1,13 @@
+@startuml
+actor User as U
+participant "ConsoleUI" as UI
+participant "Book Controller" as BC
+participant "DBManager" as DB
+
+U -> UI: Enter book details (title, author, ISBN)
+UI -> BC: Create Book instance
+BC -> DB: Insert book into database
+DB --> BC: Success/Failure
+BC --> UI: Notify result
+UI --> U: Display result to the user
+@enduml

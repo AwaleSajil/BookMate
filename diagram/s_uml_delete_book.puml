@@ -1,0 +1,13 @@
+@startuml
+actor User as U
+participant ConsoleUI as UI
+participant BookController as BC
+participant DBManager as DB
+
+U -> UI: Provide book ID
+UI -> BC: Call delete(book_id, user_id)
+BC -> DB: Execute DELETE query with book_id and user_id
+DB --> BC: Return success/failure
+BC --> UI: Return operation result
+UI --> U: Show success or failure message
+@enduml

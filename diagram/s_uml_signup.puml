@@ -1,0 +1,13 @@
+@startuml
+actor User as U
+participant ConsoleUI as UI
+participant UserController as UC
+participant DBManager as DB
+
+U -> UI: Enter username, password
+UI -> UC: call save(username, password)
+UC -> DB: Insert user details
+DB --> UC: Return success/failure
+UC --> UI: Return signup result
+UI --> U: Show success or failure message
+@enduml

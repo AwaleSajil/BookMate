@@ -1,0 +1,30 @@
+@startuml
+entity "Users" as users {
+  * user_id : INTEGER [PK]
+  --
+  username : TEXT [UNIQUE, NOT NULL]
+  password : TEXT [NOT NULL]
+}
+
+entity "Books" as books {
+  * book_id : INTEGER [PK]
+  --
+  title : TEXT [NOT NULL]
+  author : TEXT [NOT NULL]
+  isbn : TEXT [UNIQUE, NOT NULL]
+  owner_id : INTEGER [FK -> users.user_id, NOT NULL]
+}
+
+entity "Requests" as requests {
+  * request_id : INTEGER [PK]
+  --
+  book_id : INTEGER [FK -> books.book_id, NOT NULL]
+  requester_id : INTEGER [FK -> users.user_id, NOT NULL]
+  owner_id : INTEGER [FK -> users.user_id, NOT NULL]
+  status : TEXT ["Pending", "Accepted", "Rejected", DEFAULT 'Pending']
+}
+
+users ||--o{ books : "owns"
+users ||--o{ requests : "requests"
+books ||--o{ requests : "requested by"
+@enduml
